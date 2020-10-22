@@ -1,1 +1,71 @@
-Test page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <div>스타일날다</div>
+      <router-link to="/review">Review</router-link>
+      <router-link to="/qna">Q&A</router-link>
+      <router-link to="/notice">Notice</router-link>
+    </div>
+    <router-view></router-view>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    var ReviewComponent = {
+      template: '<div><router-link to="/review/photo">photo</router-link><router-link to="/review/product">product</router-link><router-view></router-view></div>'
+    }
+    var QnaComponent = {
+      template: '<div>배송이 안와요</div>'
+    }
+    var NoticeComponent = {
+      template: '<div>나 오늘 장사 안해</div>'
+    }
+    var PhotoReviewComponent = {
+      template: '<div>이게 포토리뷰다</div>'
+    }
+    var ProductReviewComponent = {
+      template: '<div>이게 상품리뷰다</div>'
+    }
+
+    var Router = new VueRouter({
+      view: 'history',   
+      routes: [
+        {
+          path: '/review',
+          component: ReviewComponent,
+          children: [
+            { path: 'photo',
+              component: PhotoReviewComponent
+            },
+            { path: 'product',
+              component: ProductReviewComponent
+            }
+          ]
+        },
+        {
+          path: '/qna',
+          component: QnaComponent
+        },
+        {
+          path: '/notice',
+          component: NoticeComponent
+        }
+      ]
+    });
+
+    new Vue({
+      el: '#app',
+      router: Router
+    });
+  </script>
+</body>
+</html>
