@@ -1,33 +1,13 @@
 <template>
   <div id="app">
-    <UserInput v-on:deliverShowValue="changeName"></UserInput>
-    <Print v-bind:propsdata = "show"></Print>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Input from './components/Input.vue'
-import Print from './components/Print.vue'
+import router from './router'
 
 export default {
-  name: 'App',
-  components: {
-    'UserInput':Input,
-    'Print':Print
-  },
-  data: function() {
-    return {
-      show: true
-    }
-  },
-  methods: {
-		changeName: function() {
-			this.show = !this.show;
-		}
-	}
+  name: 'app'
 }
 </script>
-
-<style>
-
-</style>
