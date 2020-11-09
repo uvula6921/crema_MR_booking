@@ -27,11 +27,12 @@ export default new Vuex.Store({
           color: 'blue',
           timed: false,
         }
-    ],
-    menus: ["Meeting Room 1", "Meeting Room 2", "Meeting Room 3"],
+    ]
   },
   mutations: {
-    
+    setMr1(state, payload) {
+      state.mr1 = payload
+    }
   },
   actions: {
   },

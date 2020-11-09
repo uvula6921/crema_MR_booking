@@ -1,22 +1,54 @@
 <template>
-  <div class="main-cont">
-    <div class="row-axis">
-      <router-link class="massage-chair" to="/massagechair">마사지 의자<br>사주세요...</router-link>
-    </div>
-    <div class="row-axis">
-      <div class="column-axis">
-        <router-link class="meeting-room" to="/mr1">Meeting Room 1</router-link>
-        <router-link class="meeting-room" to="/mr2">Meeting Room 2</router-link>
-        <router-link class="meeting-room" to="/mr3">Meeting Room 3</router-link>
-      </div>
-    </div>
-  </div>
+  <v-row>
+    <v-col cols="9">
+      <!-- 메인 영역 -->
+      <v-row class="fill-height">
+        <v-col cols="12">
+          <!-- 텍스트 -->
+          Text
+        </v-col>
+
+        <v-col cols="12">
+          <!-- 시간 선택 -->
+          시간 선택
+          <SelectStartTimeMain/>
+        </v-col>
+        
+        <v-col cols="12">
+          <!-- 애니메이션 -->
+          애니메이션
+        </v-col>
+      </v-row>
+    </v-col>
+
+    <v-col cols="3" class="pa-0 d-flex flex-column justify-space-between">
+      <v-card
+        class=""
+        height="30%"
+        width="100%"
+        v-for="(menu, index) in this.$store.state.menus"
+        :key="`menu_${index}`"
+      >
+        <v-btn :to="`/mr${index + 1}`">{{menu}}</v-btn>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
   
 <script>
+import SelectStartTimeMain from '@/components/time/SelectStartTimeMain'
+
 export default {
-  name: 'LayoutMain'
-}
+  name: "LayoutMain",
+  components: {
+    SelectStartTimeMain
+  },
+  data() {
+    return {
+      
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -24,34 +56,5 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-.main-cont {
-  display: flex;
-  justify-content: space-between;
-}
-.row-axis {
-  display: inline-flex;
-  padding-left: 40vh
-}
-.column-axis {
-  height: 100vh;
-}
-.massage-chair {
-  width: 25vh;
-  height: 35vh;
-  border: 1px solid #333;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.meeting-room {
-  width: 25vh;
-  height: calc(100% / 3);
-  border: 1px solid #333;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>
