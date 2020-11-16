@@ -3,31 +3,42 @@
     <v-col cols="9">
       <!-- 메인 영역 -->
       <v-row class="fill-height">
-        <v-col cols="12">
-          <!-- 텍스트 -->
-          Text
+        <v-col cols="4">
+        </v-col>
+        <v-col cols="4">
+          <v-card
+            class="d-flex justify-center align-center"
+            height="100%"
+            width="100%"
+            color="blue-grey darken-4"
+          >
+            <v-btn
+              to="/massagechair"
+              height="50"
+            >
+              마사지 의자</br>사주세요...
+            </v-btn>
+          </v-card>
         </v-col>
 
         <v-col cols="12">
-          <!-- 시간 선택 -->
-          시간 선택
-          <SelectStartTimeMain/>
+          <SelectTimeMain/>
         </v-col>
         
-        <v-col cols="12">
-          <!-- 애니메이션 -->
-          애니메이션
+        <v-col cols="12" class="d-flex align-end">
+          <ScrollBanner/>
         </v-col>
       </v-row>
     </v-col>
 
     <v-col cols="3" class="pa-0 d-flex flex-column justify-space-between">
       <v-card
-        class=""
+        class="d-flex justify-center align-center"
         height="30%"
         width="100%"
         v-for="(menu, index) in this.$store.state.menus"
         :key="`menu_${index}`"
+        color="blue-grey darken-4"
       >
         <v-btn :to="`/mr${index + 1}`">{{menu}}</v-btn>
       </v-card>
@@ -36,12 +47,14 @@
 </template>
   
 <script>
-import SelectStartTimeMain from '@/components/time/SelectStartTimeMain'
+import SelectTimeMain from '@/components/time/SelectTimeMain'
+import ScrollBanner from '@/components/layout/ScrollBanner'
 
 export default {
   name: "LayoutMain",
   components: {
-    SelectStartTimeMain
+    SelectTimeMain,
+    ScrollBanner
   },
   data() {
     return {

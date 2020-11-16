@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      color="blue darken-4"
+      color="blue-grey darken-4"
       light
       class="d-flex justify-center align-center flex-column py-16"
     >
@@ -14,7 +14,7 @@
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           {{this.$store.state.menus[0]}} 예약하기
         </v-btn>
-      </v-toolbar-title>  
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -33,7 +33,7 @@
         fab
         dark
         small
-        color="primary"
+        color="indigo darken-4"
         absolute
         right
         class="mr-n3 mt-1"
@@ -50,15 +50,10 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
-            <DatePicker></DatePicker>
-          </v-list-item>
-          <v-list-item>
-            <SelectStartTimeMain/>
-          </v-list-item>
-          <v-list-item>
-            <InputNameMR1/>
-          </v-list-item>
+          <DatePicker></DatePicker>
+          <SelectTimeMR1/>
+          <InputNameMR1/>
+          <Submit/>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -67,24 +62,26 @@
 
 <script>
 import DatePicker from "@/components/layout/DatePicker.vue";
-import SelectStartTimeMain from "@/components/time/SelectStartTimeMain.vue";
+import SelectTimeMR1 from "@/components/time/SelectTimeMR1.vue";
 import InputNameMR1 from "@/components/name/InputNameMR1.vue";
+import Submit from "@/components/layout/Submit.vue";
 
 export default {
   components: {
     DatePicker,
-    SelectStartTimeMain,
-    InputNameMR1
+    SelectTimeMR1,
+    InputNameMR1,
+    Submit
   },
   data: () => ({
     drawer: null,
-    // group: null,
+    group: null,
   }),
 
   watch: {
-    // group () {
-    //   this.drawer = false
-    // },
+    group () {
+      this.drawer = false
+    },
   },
 }
 </script>

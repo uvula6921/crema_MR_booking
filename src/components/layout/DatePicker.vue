@@ -16,6 +16,7 @@
         full-width
         elevation="15"
         :show-current="true"
+        color="indigo darken-4"
       ></v-date-picker>
     </v-col>
   </v-row>
@@ -34,5 +35,11 @@ export default {
 </script>
 
 <style>
-
+.v-date-picker-table--date .v-btn {
+  height: 25px;
+}
+.v-time-picker-title__time .v-picker__title__btn, .v-time-picker-title__time span {
+  height: 20px;
+  font-size: 40px;
+}
 </style>

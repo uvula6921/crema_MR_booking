@@ -4,6 +4,7 @@ import LayoutMain from '@/components/layout/LayoutMain.vue'
 import MR1 from '@/components/MeetingRooms/MR1'
 import MR2 from '@/components/MeetingRooms/MR2'
 import MR3 from '@/components/MeetingRooms/MR3'
+import MassageChair from '@/components/layout/MassageChair'
 
 Vue.use(VueRouter)
 
@@ -27,12 +28,12 @@ const routes = [
     path: '/mr3',
     name: 'mr3',
     component: MR3
+  },
+  {
+    path: '/massagechair',
+    name: 'MassageChair',
+    component: MassageChair
   }
-  // {
-  //   path: '/massagechair',
-  //   name: 'massagechair',
-  //   component: Home
-  // }
 ]
 
 const router = new VueRouter({

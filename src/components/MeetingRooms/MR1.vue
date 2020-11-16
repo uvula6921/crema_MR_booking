@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main> <!-- height가 화면에 100% 차게끔 수정 요망 -->
     <LayoutHeader></LayoutHeader>
     <div>
       <v-sheet tile height="40" class="d-flex mt-n2 mb-3 justify-space-between">
@@ -33,6 +33,7 @@
         </v-btn>
       </v-sheet>
       <v-sheet height="600">
+        <!-- 캘린더 타입이 month면 요약 bar에 끝나는 시간이 안나오는데 나오게 하는 방법은? -->
         <v-calendar
           ref="calendar"
           v-model="value"
@@ -44,29 +45,36 @@
           @click:event="showEvent"
           @change="getEvents"
         ></v-calendar>
-
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
-            <v-toolbar :color="selectedEvent.color" dark>
-              <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn icon>
+          <v-card color="grey lighten-4" min-width="350px" flat class="menu-card">
+            <v-toolbar :color="selectedEvent.color" dark v-slot:extension>
+              <!-- <template v-slot:extension> -->
+                <v-btn
+                  fab
+                  color="cyan accent-2"
+                  @click="dialog = !dialog"
+                  class="mr-2"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              <!-- </template> -->
+              <!-- v-menu 결과에 따라 스낵바 넣고 싶은데... -->
+              <!-- <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.start"></span>
+              <span v-html="selectedEvent.end"></span>까지 ***님이 사용
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
@@ -75,6 +83,30 @@
             </v-card-actions>
           </v-card>
         </v-menu>
+        <v-dialog
+          v-model="dialog"
+          max-width="500px"
+        >
+          <v-card>
+            <v-card-text>
+              <v-text-field label="File name"></v-text-field>
+
+              <small class="grey--text">* This doesn't actually save.</small>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                text
+                color="primary"
+                @click="dialog = false"
+              >
+                Submit
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-sheet>
     </div>
     <LayoutFooter></LayoutFooter>
@@ -106,6 +138,7 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
+    dialog: false,
   }),
   methods: {
     getEvents({ start, end }) {
@@ -133,12 +166,20 @@ export default {
 
       nativeEvent.stopPropagation();
     },
-
-    // 일정 추가 예시
     
   },
 };
 </script>
 
 <style>
+.menu-card header {
+  height: 80px !important;
+}
+.menu-card .v-toolbar__content {
+  height: 0 !important;
+  padding: 0 !important;
+}
+.menu-card .v-toolbar__extension {
+  height: 80px !important;
+}
 </style>

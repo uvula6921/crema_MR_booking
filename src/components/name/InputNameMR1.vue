@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col>
+    <v-col style="padding-top: 0 !important;">
       <v-text-field
         outlined
         label="작성자의 이름을 적어주세요."
