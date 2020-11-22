@@ -1,13 +1,9 @@
 <template>
   <v-row>
     <v-col
-      cols="3"
-    >
-    </v-col>
-    <v-col
       cols="12"
       sm="12"
-      class="my-2 px-1 mt-4"
+      class="px-1"
     >
       <v-date-picker
         ref="picker"
@@ -17,6 +13,7 @@
         elevation="15"
         :show-current="true"
         color="indigo darken-4"
+        @change="changeDate"
       ></v-date-picker>
     </v-col>
   </v-row>
@@ -31,6 +28,16 @@ export default {
   watch: {
     
   },
+  methods: {
+    changeDate() {
+      let newMeeting = this.$store.state.newMeeting
+      let { start, end } =  newMeeting
+      let startTime = this.date + start.substr(-6);
+      let endTime = this.date + end.substr(-6)
+      this.$store.commit('setStart', startTime)
+      this.$store.commit('setEnd', endTime)
+    }
+  }
 }
 </script>
 

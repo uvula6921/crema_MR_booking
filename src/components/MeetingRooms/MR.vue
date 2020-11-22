@@ -1,7 +1,7 @@
 <template>
-  <v-main> <!-- height가 화면에 100% 차게끔 수정 요망 -->
+  <v-main>
     <LayoutHeader></LayoutHeader>
-    <div>
+    <div>      
       <v-sheet tile height="40" class="d-flex mt-n2 mb-3 justify-space-between">
         <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
           <v-icon>mdi-chevron-left</v-icon>
@@ -74,7 +74,7 @@
               </v-btn> -->
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.end"></span>까지 ***님이 사용
+              <span v-html="selectedEvent.end"></span>까지 {{ selectedEvent['user'] }}님이 사용
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
@@ -122,7 +122,9 @@ export default {
     LayoutHeader,
     LayoutFooter
   },
-  data: () => ({
+  // data: () => ({
+  data: function() {
+    return {
     type: "month",
     types: ["month", "week", "day" /*'4day'*/],
     // weekday: [0, 1, 2, 3, 4, 5, 6],
@@ -139,10 +141,18 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     dialog: false,
-  }),
+      
+    }
+  },
+  computed: {
+    mrNum() {
+      return this.$route.query.mrNum
+    }
+  },
   methods: {
     getEvents({ start, end }) {
-      this.events = this.$store.state.mr1;
+      let mrKey = `mr${this.mrNum}`
+      this.events = this.$store.state[mrKey]
     },
     getEventColor(event) {
       return event.color;
@@ -172,6 +182,9 @@ export default {
 </script>
 
 <style>
+.v-main__wrap {
+  height: 100vh;
+}
 .menu-card header {
   height: 80px !important;
 }

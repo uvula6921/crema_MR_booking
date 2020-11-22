@@ -40,7 +40,7 @@
         :key="`menu_${index}`"
         color="blue-grey darken-4"
       >
-        <v-btn :to="`/mr${index + 1}`">{{menu}}</v-btn>
+        <v-btn :to="`/mr?mrNum=${index + 1}`">{{menu}}</v-btn>
       </v-card>
     </v-col>
   </v-row>

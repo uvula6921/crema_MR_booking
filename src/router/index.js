@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LayoutMain from '@/components/layout/LayoutMain.vue'
-import MR1 from '@/components/MeetingRooms/MR1'
-import MR2 from '@/components/MeetingRooms/MR2'
-import MR3 from '@/components/MeetingRooms/MR3'
+import MR from '@/components/MeetingRooms/MR'
 import MassageChair from '@/components/layout/MassageChair'
 
 Vue.use(VueRouter)
@@ -15,20 +13,25 @@ const routes = [
     component: LayoutMain
   },
   {
-    path: '/mr1',
-    name: 'mr1',
-    component: MR1
+    path: '/mr',
+    name: 'mr',
+    component: MR
   },
-  {
-    path: '/mr2',
-    name: 'mr2',
-    component: MR2
-  },
-  {
-    path: '/mr3',
-    name: 'mr3',
-    component: MR3
-  },
+  // {
+  //   path: '/mr1',
+  //   name: 'mr1',
+  //   component: MR1
+  // },
+  // {
+  //   path: '/mr2',
+  //   name: 'mr2',
+  //   component: MR2
+  // },
+  // {
+  //   path: '/mr3',
+  //   name: 'mr3',
+  //   component: MR3
+  // },
   {
     path: '/massagechair',
     name: 'MassageChair',
