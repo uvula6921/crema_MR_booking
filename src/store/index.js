@@ -7,12 +7,13 @@ export default new Vuex.Store({
   state: {
     mr1: [
       {
-        user: 'aaa',
-        name: '프로젝트 회의',
-        start: '2020-11-13 14:00',
-        end: '2020-11-13 15:00',
-        color: 'red',
+        user: 'bbb',
+        name: '프로젝트 회의3',
+        start: '2020-12-06 14:00',
+        end: '2020-12-06 15:00',
+        color: 'blue',
         timed: false,
+        mrIndex: '1',
       },
       {
         user: 'bbb',
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         end: '2020-11-06 19:00',
         color: 'green',
         timed: false,
+        mrIndex: '1',
       },
       {
         user: 'aaa',
@@ -29,18 +31,18 @@ export default new Vuex.Store({
         end: '2020-11-21 13:00',
         color: 'blue',
         timed: false,
+        mrIndex: '1',
       }
     ],
     mr2: [
       {
-
-
         user: 'bbb',
         name: '프로젝트 회의',
         start: '2020-11-16 08:00',
         end: '2020-11-16 09:00',
         color: 'red',
         timed: false,
+        mrIndex: '2',
       },
       {
         user: 'aaa',
@@ -49,6 +51,7 @@ export default new Vuex.Store({
         end: '2020-11-06 19:00',
         color: 'green',
         timed: false,
+        mrIndex: '2',
       },
     ],
     mr3: [
@@ -59,6 +62,7 @@ export default new Vuex.Store({
         end: '2020-11-13 15:00',
         color: 'red',
         timed: false,
+        mrIndex: '3',
       },
       {
         user: 'aaa',
@@ -67,6 +71,7 @@ export default new Vuex.Store({
         end: '2020-11-06 19:00',
         color: 'green',
         timed: false,
+        mrIndex: '3',
       },
       {
         user: 'aaa',
@@ -75,14 +80,16 @@ export default new Vuex.Store({
         end: '2020-11-26 16:00',
         color: 'blue',
         timed: false,
+        mrIndex: '3',
       },
       {
         user: 'bbb',
         name: '프로젝트 회의3',
-        start: '2020-11-30 17:00',
-        end: '2020-11-30 20:00',
+        start: '2020-12-06 14:00',
+        end: '2020-12-06 15:00',
         color: 'blue',
         timed: false,
+        mrIndex: '3',
       }
     ],
     menus: ["Meeting Room 1", "Meeting Room 2", "Meeting Room 3"],
@@ -92,6 +99,7 @@ export default new Vuex.Store({
       end: new Date().toISOString().substr(0, 16).replace('T', ' '),
       color: 'green',
       timed: false,
+      mrIndex: 0,
     }
   },
   mutations: {
@@ -130,6 +138,11 @@ export default new Vuex.Store({
     setColor(state, color) {
       let newMeeting = { ...state.newMeeting } // 깊은 복사
       newMeeting['color'] = color
+      state.newMeeting = newMeeting
+    },
+    setmrIndex(state, mrIndex) {
+      let newMeeting = { ...state.newMeeting } // 깊은 복사
+      newMeeting['mrIndex'] = mrIndex
       state.newMeeting = newMeeting
     }
   },

@@ -31,7 +31,7 @@ export default {
   methods: {
     changeDate() {
       let newMeeting = this.$store.state.newMeeting
-      let { start, end } =  newMeeting
+      let { start, end } =  newMeeting // newMeeting.start, newMeeting.end를 각각 start, end에 할당
       let startTime = this.date + start.substr(-6);
       let endTime = this.date + end.substr(-6)
       this.$store.commit('setStart', startTime)

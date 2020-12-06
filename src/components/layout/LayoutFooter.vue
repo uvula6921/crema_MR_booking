@@ -90,31 +90,22 @@ export default {
   methods: {
     // 변경된 시간을 확인하여, 가능한지 isAvailable 세팅
     checkAvailable() {
-      console.log("checkAvailable");
-
       let inputStart = new Date(this.newMeeting["start"]);
       let inputEnd = new Date(this.newMeeting["end"]);
-      console.log("inputStart", inputStart);
-      console.log("inputEnd", inputEnd);
-
       let meetings = this.$store.state[`mr${this.mrNum}`];
-      console.log("meetings", meetings);
 
       this.isAvailable = meetings.every((meeting, index) => {
-        // 로직: let isAvailable = !(startDate <= inputStart && inputStart <= endDate) && !(inputStart <= startDate && startDate <= inputEnd)
-
         let start = new Date(meeting["start"]);
         let end = new Date(meeting["end"]);
-        let isAvailable = this.getIsAvaliable(inputStart, inputEnd, start, end);
-        console.log("isAvailable", isAvailable);
+        let isAvailable = this.getIsAvailable(inputStart, inputEnd, start, end);
 
         return isAvailable;
       });
     },
-    getIsAvaliable(inputStart, inputEnd, startDate, endDate) {
+    getIsAvailable(inputStart, inputEnd, startDate, endDate) {
       return (
-        !(startDate <= inputStart && inputStart <= endDate) &&
-        !(inputStart <= startDate && startDate <= inputEnd)
+        !(startDate <= inputStart && inputStart < endDate) &&
+        !(inputStart <= startDate && startDate < inputEnd)
       );
     },
   },

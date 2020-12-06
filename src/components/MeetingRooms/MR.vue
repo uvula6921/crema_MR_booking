@@ -146,7 +146,7 @@ export default {
   },
   computed: {
     mrNum() {
-      return this.$route.query.mrNum
+      return this.$route.query.mrNum // $route.query는 페이지의 url 정보를 가져옴
     }
   },
   methods: {

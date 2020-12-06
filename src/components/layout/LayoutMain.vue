@@ -23,6 +23,7 @@
 
         <v-col cols="12">
           <SelectTimeMain/>
+          <div>{{ availableText }}</div>
         </v-col>
         
         <v-col cols="12" class="d-flex align-end">
@@ -56,10 +57,44 @@ export default {
     SelectTimeMain,
     ScrollBanner
   },
-  data() {
-    return {
-      
-    };
+  data: () => ({
+    AvailableMRNums: [],
+  }),
+  computed: {
+    newMeeting() {
+      return this.$store.state.newMeeting;
+    },
+    availableText() {
+      if (this.AvailableMRNums.length) return `${this.AvailableMRNums} 이용불가능한 시간 입니다`;
+    },
+  },
+  watch: {
+    newMeeting() {
+      this.checkAvailableMRNum();
+    },
+  },
+  methods: {
+    // 불가능한 MRNum을 확인하여 AvailableMRNums 세팅
+    checkAvailableMRNum() {
+      let inputStart = new Date(this.newMeeting["start"]);
+      let inputEnd = new Date(this.newMeeting["end"]);
+      let meetings = [ 
+        ...this.$store.state['mr1'],
+        ...this.$store.state['mr2'],
+        ...this.$store.state['mr3']
+        // 회의실이 추가되는걸 고려해서 변수화하려면 어떻게 해야하지?
+      ]
+      let mrIndexes = [];
+      meetings.forEach(function(meeting, index, meetings) {
+        let start = new Date(meeting["start"]);
+        let end = new Date(meeting["end"]);
+        let isAvailable = (!(start <= inputStart && inputStart < end) && !(inputStart <= start && start < inputEnd));
+        if (!isAvailable) {
+          mrIndexes.push(meeting.mrIndex);
+        };
+      });
+      this.AvailableMRNums = mrIndexes;
+    },
   },
 };
 </script>
