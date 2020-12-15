@@ -44,6 +44,8 @@
           :event-color="getEventColor"
           @click:event="showEvent"
           @change="getEvents"
+          @click:more="viewDay"
+          @click:date="viewDay"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -54,18 +56,21 @@
           <v-card color="grey lighten-4" min-width="350px" flat class="menu-card">
             <v-toolbar :color="selectedEvent.color" dark v-slot:extension>
               <!-- <template v-slot:extension> -->
-                <v-btn
+                <!-- <v-btn
                   fab
                   color="cyan accent-2"
                   @click="dialog = !dialog"
                   class="mr-2"
                 >
                   <v-icon>mdi-pencil</v-icon>
-                </v-btn>
+                </v-btn> -->
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon>
-                  <v-icon>mdi-dots-vertical</v-icon>
+                <v-btn
+                  icon
+                  @click="[deleteEvent(), switchSelectedOpen()]"
+                >
+                  <v-icon>mdi-delete</v-icon>
                 </v-btn>
               <!-- </template> -->
               <!-- v-menu 결과에 따라 스낵바 넣고 싶은데... -->
@@ -77,7 +82,7 @@
               <span v-html="selectedEvent.end"></span>까지 {{ selectedEvent['user'] }}님이 사용
             </v-card-text>
             <v-card-actions>
-              <v-btn text color="secondary" @click="selectedOpen = false">
+              <v-btn text color="secondary" @click="switchSelectedOpen">
                 닫기
               </v-btn>
             </v-card-actions>
@@ -125,23 +130,23 @@ export default {
   // data: () => ({
   data: function() {
     return {
-    type: "month",
-    types: ["month", "week", "day" /*'4day'*/],
-    // weekday: [0, 1, 2, 3, 4, 5, 6],
-    weekday: [1, 2, 3, 4, 5],
-    weekdays: [
-      //{ text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
-      { text: "Mon - Fri", value: [1, 2, 3, 4, 5] },
-      { text: "Mon - Sun", value: [1, 2, 3, 4, 5, 6, 0] },
-      //{ text: 'Mon, Wed, Fri', value: [1, 3, 5] },
-    ],
-    value: "",
-    events: [],
-    selectedEvent: {},
-    selectedElement: null,
-    selectedOpen: false,
-    dialog: false,
-      
+      type: "month",
+      types: ["month", "week", "day" /*'4day'*/],
+      // weekday: [0, 1, 2, 3, 4, 5, 6],
+      weekday: [1, 2, 3, 4, 5],
+      weekdays: [
+        //{ text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+        { text: "Mon - Fri", value: [1, 2, 3, 4, 5] },
+        { text: "Mon - Sun", value: [1, 2, 3, 4, 5, 6, 0] },
+        //{ text: 'Mon, Wed, Fri', value: [1, 3, 5] },
+      ],
+      value: "",
+      events: [],
+      selectedEvent: {},
+      selectedElement: null,
+      selectedOpen: false,
+      dialog: false,
+      mrKey: 0
     }
   },
   computed: {
@@ -150,9 +155,28 @@ export default {
     }
   },
   methods: {
+    deleteEvent () {
+      this.mrKey = `mr${this.mrNum}`
+      let events = this.$store.state[this.mrKey]
+      let eventIndex = events.findIndex(this.isDeletingEvent);
+      events.splice(eventIndex, 1)
+      // this.$store.state[this.mrKey] = events
+    },
+    isDeletingEvent(element)  {
+      if(element.start === this.selectedEvent.start) {
+        return true;
+      }
+    },
+    switchSelectedOpen () {
+      this.selectedOpen = !this.selectedOpen
+    },
+    viewDay ({ date }) {
+      this.value = date
+      this.type = 'day'
+    },
     getEvents({ start, end }) {
-      let mrKey = `mr${this.mrNum}`
-      this.events = this.$store.state[mrKey]
+      this.mrKey = `mr${this.mrNum}`
+      this.events = this.$store.state[this.mrKey]
     },
     getEventColor(event) {
       return event.color;

@@ -9,8 +9,8 @@ export default new Vuex.Store({
       {
         user: 'bbb',
         name: '프로젝트 회의3',
-        start: '2020-12-06 14:00',
-        end: '2020-12-06 15:00',
+        start: '2020-12-15 14:00',
+        end: '2020-12-15 15:00',
         color: 'blue',
         timed: false,
         mrIndex: '1',
@@ -18,8 +18,8 @@ export default new Vuex.Store({
       {
         user: 'bbb',
         name: '프로젝트 회의2',
-        start: '2020-11-05 16:00',
-        end: '2020-11-06 19:00',
+        start: '2020-12-05 16:00',
+        end: '2020-12-06 19:00',
         color: 'green',
         timed: false,
         mrIndex: '1',
@@ -27,8 +27,8 @@ export default new Vuex.Store({
       {
         user: 'aaa',
         name: '프로젝트 회의3',
-        start: '2020-11-20 11:00',
-        end: '2020-11-21 13:00',
+        start: '2020-12-20 11:00',
+        end: '2020-12-21 13:00',
         color: 'blue',
         timed: false,
         mrIndex: '1',
@@ -38,8 +38,35 @@ export default new Vuex.Store({
       {
         user: 'bbb',
         name: '프로젝트 회의',
-        start: '2020-11-16 08:00',
-        end: '2020-11-16 09:00',
+        start: '2020-12-16 08:00',
+        end: '2020-12-16 09:00',
+        color: 'green',
+        timed: false,
+        mrIndex: '2',
+      },
+      {
+        user: 'bbb',
+        name: '프로젝트 회의',
+        start: '2020-12-16 14:00',
+        end: '2020-12-16 15:00',
+        color: 'grey',
+        timed: false,
+        mrIndex: '2',
+      },
+      {
+        user: 'bbb',
+        name: '프로젝트 회의',
+        start: '2020-12-16 15:00',
+        end: '2020-12-16 16:00',
+        color: 'red',
+        timed: false,
+        mrIndex: '2',
+      },
+      {
+        user: 'bbb',
+        name: '프로젝트 회의',
+        start: '2020-12-16 16:00',
+        end: '2020-12-16 17:00',
         color: 'red',
         timed: false,
         mrIndex: '2',
@@ -47,8 +74,8 @@ export default new Vuex.Store({
       {
         user: 'aaa',
         name: '프로젝트 회의2',
-        start: '2020-11-05 16:00',
-        end: '2020-11-06 19:00',
+        start: '2020-12-05 16:00',
+        end: '2020-12-06 19:00',
         color: 'green',
         timed: false,
         mrIndex: '2',
@@ -57,9 +84,18 @@ export default new Vuex.Store({
     mr3: [
       {
         user: 'bbb',
+        name: '프로젝트 회의3',
+        start: '2020-12-15 14:00',
+        end: '2020-12-15 15:00',
+        color: 'blue',
+        timed: false,
+        mrIndex: '3',
+      },
+      {
+        user: 'bbb',
         name: '프로젝트 회의',
-        start: '2020-11-13 14:00',
-        end: '2020-11-13 15:00',
+        start: '2020-12-13 14:00',
+        end: '2020-12-13 15:00',
         color: 'red',
         timed: false,
         mrIndex: '3',
@@ -67,8 +103,8 @@ export default new Vuex.Store({
       {
         user: 'aaa',
         name: '프로젝트 회의2',
-        start: '2020-11-05 16:00',
-        end: '2020-11-06 19:00',
+        start: '2020-12-05 16:00',
+        end: '2020-12-06 19:00',
         color: 'green',
         timed: false,
         mrIndex: '3',
@@ -76,8 +112,8 @@ export default new Vuex.Store({
       {
         user: 'aaa',
         name: '프로젝트 회의3',
-        start: '2020-11-25 11:00',
-        end: '2020-11-26 16:00',
+        start: '2020-12-25 11:00',
+        end: '2020-12-26 16:00',
         color: 'blue',
         timed: false,
         mrIndex: '3',
@@ -95,8 +131,8 @@ export default new Vuex.Store({
     menus: ["Meeting Room 1", "Meeting Room 2", "Meeting Room 3"],
     newMeeting: {
       name: '',
-      start: new Date().toISOString().substr(0, 16).replace('T', ' '),
-      end: new Date().toISOString().substr(0, 16).replace('T', ' '),
+      start: (new Date(Date.now() + 32400000)).toISOString().substr(0, 16).replace('T', ' '),
+      end: (new Date(Date.now() + 32400000)).toISOString().substr(0, 16).replace('T', ' '),
       color: 'green',
       timed: false,
       mrIndex: 0,
@@ -144,7 +180,7 @@ export default new Vuex.Store({
       let newMeeting = { ...state.newMeeting } // 깊은 복사
       newMeeting['mrIndex'] = mrIndex
       state.newMeeting = newMeeting
-    }
+    },
   },
   actions: {
   },

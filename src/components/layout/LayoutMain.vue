@@ -23,7 +23,7 @@
 
         <v-col cols="12">
           <SelectTimeMain/>
-          <div>{{ availableText }}</div>
+          <div class="mt-10 text-h4 font-weight-bold" style="text-align: center;">{{ availableText }}</div>
         </v-col>
         
         <v-col cols="12" class="d-flex align-end">
@@ -65,7 +65,8 @@ export default {
       return this.$store.state.newMeeting;
     },
     availableText() {
-      if (this.AvailableMRNums.length) return `${this.AvailableMRNums} 이용불가능한 시간 입니다`;
+      if (this.AvailableMRNums.length) return `MEETING ROOM${this.AvailableMRNums} 이용가능한 시간 입니다`;
+      // 이용가능한 시간 이라는 문구로 교체되도록 수정 ([1,2,3]에서 겹치는 시간의 mrIndex를 빼도록 하면?)
     },
   },
   watch: {
@@ -84,16 +85,18 @@ export default {
         ...this.$store.state['mr3']
         // 회의실이 추가되는걸 고려해서 변수화하려면 어떻게 해야하지?
       ]
-      let mrIndexes = [];
+      let mrIndexes = ['1','2','3'];
       meetings.forEach(function(meeting, index, meetings) {
         let start = new Date(meeting["start"]);
         let end = new Date(meeting["end"]);
         let isAvailable = (!(start <= inputStart && inputStart < end) && !(inputStart <= start && start < inputEnd));
         if (!isAvailable) {
-          mrIndexes.push(meeting.mrIndex);
+          mrIndexes.splice(mrIndexes.indexOf(`${meeting.mrIndex}`),1);
         };
+        console.log(mrIndexes)
       });
       this.AvailableMRNums = mrIndexes;
+      // 회의실 숫자 중복으로 출력 안되게 수정
     },
   },
 };
